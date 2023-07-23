@@ -1,1 +1,2 @@
-# Fifa-WC-2022
+# Fifa-WC-2022 EDA
+I have undertaken exploratory data analysis of Fifa World Cuo 2022. This was a project driven by my interest for football. I have been following football since long but this world cup was really close to my heart. In this, I mostly derived data for Argentina's matches. I have used different parameters to analyse Argentina's perforomance. I have also compared the performance of Argentina on these indicators like possession, goal scored etc to other semifinalists and finalist nation. I would be working on this dataset more in the coming weeks. Right now the work is restricted to SQL only but I will be expanding on it in coming weeks
