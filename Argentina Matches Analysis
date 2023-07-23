@@ -1,0 +1,162 @@
+-- Viewing the entire table
+SELECT *
+FROM Fifa_world_cup_matches
+
+-- Argentina Matches
+SELECT *
+FROM Fifa_world_cup_matches
+WHERE team1 = 'ARGENTINA' OR
+team2 = 'Argentina'
+
+-- Argentina vs Saudi Arabia Analysis
+SELECT *
+FROM Fifa_world_cup_matches
+WHERE team1 = 'ARGENTINA' AND
+team2 = 'SAUDI ARABIA'
+
+-- Offsides vs Saudi and other teams
+
+SELECT team1, team2, offsides_team1, offsides_team2
+FROM Fifa_world_cup_matches
+WHERE team1 = 'ARGENTINA' AND
+team2 = 'SAUDI ARABIA'
+
+SELECT team1, team2, avg(offsides_team1) over () as AvgoffsideT1
+FROM Fifa_world_cup_matches
+WHERE team1 = 'ARGENTINA' 
+
+SELECT team1, team2, avg(offsides_team2) over () as AvgoffsideT2
+FROM Fifa_world_cup_matches
+WHERE team2 = 'ARGENTINA'
+
+SELECT defensive_pressures_applied_team1
+FROM Fifa_world_cup_matches
+WHERE team1 = 'ARGENTINA' AND
+team2 = 'SAUDI ARABIA'
+
+SELECT AVG(defensive_pressures_applied_team2)
+FROM Fifa_world_cup_matches
+WHERE team2 = 'ARGENTINA' 
+
+-- Defensive Pressure applied in other 2 Group C matches
+SELECT defensive_pressures_applied_team1, defensive_pressures_applied_team2
+FROM Fifa_world_cup_matches
+WHERE (team1 = 'ARGENTINA' OR team2 = 'ARGENTINA') AND category = 'Group C'
+
+-- Crosses 
+SELECT team1, team2, crosses_completed_team1, crosses_completed_team1
+FROM Fifa_world_cup_matches
+WHERE team1 = 'ARGENTINA' OR team2 = 'ARGENTINA'
+
+-- Possession
+SELECT team1, team2, possession_team1
+FROM Fifa_world_cup_matches
+WHERE team1 = 'ARGENTINA'
+ORDER BY possession_team1
+
+SELECT team1, team2, possession_team2
+FROM Fifa_world_cup_matches
+WHERE team2 = 'ARGENTINA'
+ORDER BY possession_team2
+
+SELECT possession_team1 AS possession FROM Fifa_world_cup_matches WHERE team1 = 'Argentina'
+UNION ALL
+SELECT possession_team2 AS possession FROM Fifa_world_cup_matches WHERE team2 = 'Argentina'
+
+-- Average goals scored compared to other nations
+1. Argentina
+SELECT AVG(goals_scored)
+FROM (
+    SELECT number_of_goals_team1 AS goals_scored FROM Fifa_world_cup_matches WHERE team1 = 'Argentina'
+    UNION ALL
+    SELECT number_of_goals_team2 AS goals_scored FROM Fifa_world_cup_matches WHERE team2 = 'Argentina'
+) AS avg_goals_scored
+
+2. France
+SELECT AVG(goals_scored)
+FROM (
+    SELECT number_of_goals_team1 AS goals_scored FROM Fifa_world_cup_matches WHERE team1 = 'France'
+    UNION ALL
+    SELECT number_of_goals_team2 AS goals_scored FROM Fifa_world_cup_matches WHERE team2 = 'France'
+) AS avg_goals_scored
+
+3. Croatia
+SELECT AVG(goals_scored)
+FROM (
+    SELECT number_of_goals_team1 AS goals_scored FROM Fifa_world_cup_matches WHERE team1 = 'Croatia'
+    UNION ALL
+    SELECT number_of_goals_team2 AS goals_scored FROM Fifa_world_cup_matches WHERE team2 = 'Croatia'
+) AS avg_goals_scored
+
+4. Morrocco 
+SELECT AVG(goals_scored)
+FROM (
+    SELECT number_of_goals_team1 AS goals_scored FROM Fifa_world_cup_matches WHERE team1 = 'Morocco'
+    UNION ALL
+    SELECT number_of_goals_team2 AS goals_scored FROM Fifa_world_cup_matches WHERE team2 = 'Morocco'
+) AS avg_goals_scored
+
+-- Avg forced turnovers Compared to peers
+1. Argentina
+SELECT AVG(forced_turnovers)
+FROM (
+    SELECT forced_turnovers_team1 AS forced_turnovers FROM Fifa_world_cup_matches WHERE team1 = 'Argentina'
+    UNION ALL
+    SELECT forced_turnovers_team2 AS forced_turnovers FROM Fifa_world_cup_matches WHERE team2 = 'Argentina'
+) AS avg_forced_turnovers
+
+2. France
+SELECT AVG(forced_turnovers)
+FROM (
+    SELECT forced_turnovers_team1 AS forced_turnovers FROM Fifa_world_cup_matches WHERE team1 = 'France'
+    UNION ALL
+    SELECT forced_turnovers_team2 AS forced_turnovers FROM Fifa_world_cup_matches WHERE team2 = 'France'
+) AS avg_forced_turnovers
+
+3. Croatia 
+SELECT AVG(forced_turnovers)
+FROM (
+    SELECT forced_turnovers_team1 AS forced_turnovers FROM Fifa_world_cup_matches WHERE team1 = 'Croatia'
+    UNION ALL
+    SELECT forced_turnovers_team2 AS forced_turnovers FROM Fifa_world_cup_matches WHERE team2 = 'Croatia'
+) AS avg_forced_turnovers
+
+4. Morocco
+SELECT AVG(forced_turnovers)
+FROM (
+    SELECT forced_turnovers_team1 AS forced_turnovers FROM Fifa_world_cup_matches WHERE team1 = 'Morocco'
+    UNION ALL
+    SELECT forced_turnovers_team2 AS forced_turnovers FROM Fifa_world_cup_matches WHERE team2 = 'Morocco'
+) AS avg_forced_turnovers
+
+-- Avg defensive pressure as compared to peers
+1. SELECT AVG(defensive_pressures)
+FROM (
+    SELECT defensive_pressures_applied_team1 AS defensive_pressures FROM Fifa_world_cup_matches WHERE team1 = 'Argentina'
+    UNION ALL
+    SELECT defensive_pressures_applied_team2 AS defensive_pressures FROM Fifa_world_cup_matches WHERE team2 = 'Argentina'
+) AS avg_defensive_pressures
+
+2. France
+SELECT AVG(defensive_pressures)
+FROM (
+    SELECT defensive_pressures_applied_team1 AS defensive_pressures FROM Fifa_world_cup_matches WHERE team1 = 'France'
+    UNION ALL
+    SELECT defensive_pressures_applied_team2 AS defensive_pressures FROM Fifa_world_cup_matches WHERE team2 = 'France'
+) AS avg_defensive_pressures
+
+3. Croatia
+SELECT AVG(defensive_pressures)
+FROM (
+    SELECT defensive_pressures_applied_team1 AS defensive_pressures FROM Fifa_world_cup_matches WHERE team1 = 'Croatia'
+    UNION ALL
+    SELECT defensive_pressures_applied_team2 AS defensive_pressures FROM Fifa_world_cup_matches WHERE team2 = 'Croatia'
+) AS avg_defensive_pressures
+
+4. Morocco
+SELECT AVG(defensive_pressures)
+FROM (
+    SELECT defensive_pressures_applied_team1 AS defensive_pressures FROM Fifa_world_cup_matches WHERE team1 = 'Morocco'
+    UNION ALL
+    SELECT defensive_pressures_applied_team2 AS defensive_pressures FROM Fifa_world_cup_matches WHERE team2 = 'Morocco'
+) AS avg_defensive_pressures
